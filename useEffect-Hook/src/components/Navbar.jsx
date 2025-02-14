@@ -17,7 +17,16 @@ const Navbar = ({color}) => {
     alert("Hey I am running because color was changed")
     setColor(color + 1)
   },[color])
+
+// Example of cleanup function
+useEffect(() => {
+    alert("Hey Welcome to my page. This is the first render of app.jsx")
   
+    return () => {
+      alert("Alert was unmounted")
+    }
+  }, [])
+
   return (
     <div>I am navbar of {color} color.</div>
   )
