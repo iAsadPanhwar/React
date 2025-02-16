@@ -14,7 +14,7 @@ function App() {
   const [count, setCount] = useState(0)
   const [numbers, setNumbers] = useState(nums)
   // const magical = numbers.find(item=>item.isMagical===true)
-  const magical = useMemo(() => numbers.find(item=>item.isMagical===true), [])
+  const magical = useMemo(() => numbers.find(item=>item.isMagical===true), [numbers])
   return (
     <>
       <div>
@@ -28,7 +28,17 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+        <button onClick={() => 
+          {setCount((count) => count + 1);
+            if(count==10){
+              setNumbers(new Array(10_000_000).fill(0).map((_,i)=>{
+                return {
+                  index:i,
+                  isMagical: i===9_000_000
+                }
+              }))
+            }
+          }}>
           count is {count}
         </button>
         <p>
